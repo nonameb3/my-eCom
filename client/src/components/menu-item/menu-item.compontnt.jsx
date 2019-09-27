@@ -1,11 +1,11 @@
 import React from "react";
-import './menu-item.sttyle.scss';
+import "./menu-item.sttyle.scss";
 
-export default function Menuitem({title, size, imageUrl}) {
+export default function Menuitem({ title, size, imageUrl }) {
   return (
     <div className={`${size} menu-item`}>
       <div
-        className='background-image'
+        className="background-image"
         style={{
           backgroundImage: `url(${imageUrl})`
         }}
