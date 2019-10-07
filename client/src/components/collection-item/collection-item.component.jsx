@@ -1,7 +1,7 @@
-import React from 'react'
-import "./collection-item.style.scss"
+import React from "react";
+import "./collection-item.style.scss";
 
-export default function ({name, price, imageUrl}) {
+export default function({ name, price, imageUrl }) {
   return (
     <div className="collection-item">
       <div
@@ -15,5 +15,5 @@ export default function ({name, price, imageUrl}) {
         <span className="price">{price}</span>
       </div>
     </div>
-  )
+  );
 }

@@ -11,10 +11,8 @@ export default function CollectionPreview({ title, items }) {
           items
             .filter((e, idx) => idx < 4)
             .map(({ id, ...otherItem }) => (
-            <CollectionItem 
-              key={id}
-              {...otherItem}
-            />))}
+              <CollectionItem key={id} {...otherItem} />
+            ))}
       </div>
     </div>
   );
