@@ -5,8 +5,8 @@ import './signIn.style.scss';
 
 export default function() {
   return (
-    <div>
+    <React.Fragment>
       <SignIn/>
-    </div>
+    </React.Fragment>
   )
 }
