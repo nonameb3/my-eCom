@@ -1,17 +1,17 @@
-import firebase from "firebase/app";
-import "firebase/storage";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
 import "firebase/auth";
 
-// firebase private config
+// firebase private config Firebase SDK snippet
 const config = {
-  apiKey: "xxxxxx",
-  authDomain: "xxxxxx",
-  databaseURL: "xxxxxx",
-  projectId: "xxxxxx",
-  storageBucket: "xxxxxx",
-  messagingSenderId: "xxxxxx",
-  appId: "xxxxxx",
-  measurementId: "xxxxxx"
+  apiKey: "xxxxxxxxxxxxxxx",
+  authDomain: "xxxxxxxxxxxxxxx",
+  databaseURL: "xxxxxxxxxxxxxxx",
+  projectId: "xxxxxxxxxxxxxxx",
+  storageBucket: "xxxxxxxxxxxxxxx",
+  messagingSenderId: "xxxxxxxxxxxxxxx",
+  appId: "xxxxxxxxxxxxxxx",
+  measurementId: "xxxxxxxxxxxxxxx"
 };
 
 firebase.initializeApp(config);
