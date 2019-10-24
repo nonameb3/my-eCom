@@ -6,9 +6,9 @@ import './signIn.style.scss';
 
 export default function() {
   return (
-    <React.Fragment>
+    <div className="signin-signup">
       <SignIn/>
       <SignUp/>
-    </React.Fragment>
+    </div>
   )
 }

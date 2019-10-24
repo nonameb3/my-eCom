@@ -23,7 +23,7 @@ export class signIn extends Component {
 
   render() {
     return (
-      <div className="signin">
+      <div className="signup">
         <h1>I already have an account</h1>
         <span>Sign in with your email and password</span>
         <form onSubmit={this.handleOnSubmit}>
