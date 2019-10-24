@@ -15,6 +15,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    // function call any time the auth state changes
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
       if (user) {
         const userRef = await createUserProfileDoccument(user);
@@ -33,6 +34,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
+    //function that can be used to remove the original.
     this.unsubscribeFromAuth();
   }
 
