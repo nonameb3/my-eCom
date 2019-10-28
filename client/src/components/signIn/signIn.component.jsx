@@ -16,7 +16,7 @@ export class signIn extends Component {
     const { email, password } = this.state;
 
     try {
-      await auth.signInWithEmailAndPassword(email,password);
+      await auth.signInWithEmailAndPassword(email.trim(), password);
       this.setState({ email: "", password: "" });
     } catch (error) {
       console.error(error.message)
@@ -50,7 +50,7 @@ export class signIn extends Component {
           />
           <div className="buttons">
             <CustomButton type="submit">Sign-in</CustomButton>
-            <CustomButton googleSignInButton type="submit" onClick={signInWithGoogle}>
+            <CustomButton googleSignInButton type="button" onClick={signInWithGoogle}>
               Sign-in with Google
             </CustomButton>
           </div>

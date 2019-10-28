@@ -24,7 +24,7 @@ export class signUpCompoent extends Component {
 
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
-        email,
+        email.trim(),
         password
       );
       await createUserProfileDoccument(user, { displayName });
