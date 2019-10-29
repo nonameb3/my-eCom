@@ -1,0 +1,36 @@
+.cart-dropdown {
+  position: absolute;
+  width: 240px;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid black;
+  background-color: white;
+  top: 90px;
+  right: 40px;
+  z-index: 5;
+
+  .cart-items {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    background: transparent;
+  }
+
+  button {
+    margin-top: auto;
+  }
+}
+
+// custom scrollber
+.cart-dropdown {
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
+
+  ::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+}
