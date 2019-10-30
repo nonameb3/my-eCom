@@ -15,22 +15,32 @@
     height: 240px;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: hidden;
     background: transparent;
+
+    // custom scrollbar
+    &:hover {
+      overflow: overlay;
+    }
+  
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 0px;
+      background: transparent;
+    }
+  
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: #f5f5f5;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #555;
+    }
   }
 
   button {
     margin-top: auto;
-  }
-}
-
-// custom scrollber
-.cart-dropdown {
-  -ms-overflow-style: none; // IE 10+
-  scrollbar-width: none; // Firefox
-
-  ::-webkit-scrollbar {
-    width: 0px; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
   }
 }

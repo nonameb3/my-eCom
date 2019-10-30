@@ -1,4 +1,5 @@
 import * as TYPE from "./cart.type";
+import { addNewCartItems } from './cart.utils'
 
 const INITIAL_STATE = {
   hidden: true,
@@ -15,7 +16,7 @@ export default function(state = INITIAL_STATE, action) {
     case TYPE.ADD_CART_ITEMS:
       return {
         ...state,
-        cartItems: [...state.cartItems, action.payload]
+        cartItems: addNewCartItems(state.cartItems, action.payload)
       }
     default:
       return state;
