@@ -18,6 +18,12 @@
     overflow: hidden;
     background: transparent;
 
+    .empty-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 50px auto;
+    }
+    
     // custom scrollbar
     &:hover {
       overflow: overlay;
