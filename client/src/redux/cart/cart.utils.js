@@ -4,7 +4,6 @@ export const addNewCartItems = (cartitems = [], newCartItem = {}) => {
     cartitem => cartitem.id === newCartItem.id
   );
 
-  console.log('existingCartItem', existingCartItem)
   // +1 quantity if exist
   if (existingCartItem) {
     // return array
