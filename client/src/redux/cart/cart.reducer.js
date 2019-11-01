@@ -1,5 +1,5 @@
 import * as TYPE from "./cart.type";
-import { addNewCartItems } from './cart.utils'
+import { addNewCartItems, removeCartItem } from './cart.utils'
 
 const INITIAL_STATE = {
   hidden: true,
@@ -17,6 +17,16 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         cartItems: addNewCartItems(state.cartItems, action.payload)
+      }
+    case TYPE.REMOVE_CART_ITEM:
+      return {
+        ...state,
+        cartItems: removeCartItem(state.cartItems, action.payload)
+      }
+    case TYPE.DELETE_CART_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(item => item.id !== action.payload.id)
       }
     default:
       return state;
