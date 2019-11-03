@@ -46,12 +46,6 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact component={Homepage} />
           <Route path="/checkout" component={Checkout} />
-          <Route path="/hats" exact component={() => <div>Hats Pages</div>} />
-          <Route
-            path="/hats/:id"
-            exact
-            component={() => <div>Hats Pages : id</div>}
-          />
           <Route path="/shop" component={Shop} />
           <Route path="/signin" exact component={SignIn} />
         </Switch>

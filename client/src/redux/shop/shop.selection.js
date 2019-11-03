@@ -11,7 +11,5 @@ export const SelectShopCollection = selectRouteName =>
   createSelector(
     [selectShopCollections],
     shopCollection =>
-      shopCollection.find(
-        collection => collection.routeName === selectRouteName
-      )
+      shopCollection[selectRouteName]
   );

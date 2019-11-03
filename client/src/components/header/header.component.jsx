@@ -21,9 +21,6 @@ function Header({ currentUser, hidden }) {
         <Link className="option" to="/shop">
           Shop
         </Link>
-        <Link className="option" to="/hats">
-          Hats
-        </Link>
         {currentUser !== null ? (
           <div className="option" onClick={() => auth.signOut()}>
             SignOut
