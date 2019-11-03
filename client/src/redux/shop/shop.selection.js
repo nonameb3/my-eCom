@@ -2,7 +2,16 @@ import { createSelector } from "reselect";
 
 const selectShop = state => state.shop;
 
-export const selectShopCollection = createSelector(
+export const selectShopCollections = createSelector(
   [selectShop],
   shop => shop.collection
 );
+
+export const SelectShopCollection = selectRouteName =>
+  createSelector(
+    [selectShopCollections],
+    shopCollection =>
+      shopCollection.find(
+        collection => collection.routeName === selectRouteName
+      )
+  );
