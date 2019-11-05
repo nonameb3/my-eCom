@@ -30,7 +30,7 @@ const CheckoutComponent = ({ cartItems, total }) => {
       <div className="note">
         **Please use following credit card for test payment**
         <br/>
-        Number: 4242 4242 4242 4242, Exp: 01/12, CVV: 123
+        Number: 4242 4242 4242 4242, Exp: 01/20, CVV: 123
       </div>
       <CheckoutButton price={total}/>
     </div>
