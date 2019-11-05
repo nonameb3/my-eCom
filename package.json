@@ -1,0 +1,26 @@
+{
+  "name": "my-ecom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nonameb3/my-eCom.git"
+  },
+  "author": "waraphon roonnapai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nonameb3/my-eCom/issues"
+  },
+  "homepage": "https://github.com/nonameb3/my-eCom#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
