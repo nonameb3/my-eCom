@@ -4,7 +4,13 @@ import "firebase/auth";
 import { config } from "./config";
 
 // config firebase key
-firebase.initializeApp(config);
+const privateConfig = process.env.REACT_APP_FIREBASE_CONFIG_STRINGIFY;
+let firebaseConfig = config;
+
+if(privateConfig){
+  firebaseConfig = JSON.parse(privateConfig);
+}
+firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
