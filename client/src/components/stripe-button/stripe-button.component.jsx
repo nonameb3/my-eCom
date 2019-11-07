@@ -5,7 +5,6 @@ import StripeCheckout from "react-stripe-checkout";
 export default function({ price }) {
   // your Publishable key
   const publicKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
-  console.log('publicKey', publicKey)
   const priceForStripe = price * 100;
   const onToken = token => {
     console.log("token", token);
