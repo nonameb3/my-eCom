@@ -1,12 +1,13 @@
 import React from "react";
-import Directory from '../../components/directory/directory.component';
-import './homepage.style.scss';
+import Directory from "../../components/directory/directory.component";
+
+import { HomePage } from "./homepage.style";
 
 export default function homepage() {
   return (
-    <div className="homepage">
+    <HomePage>
       <h1>Welcome to my Homepage</h1>
-      <Directory/>
-    </div>
+      <Directory />
+    </HomePage>
   );
 }
