@@ -12,7 +12,7 @@ export const selectShopCollectionsArray = createSelector(
   selectShopCollections => Object.values(selectShopCollections)
 )
 
-export const SelectShopCollection = selectRouteName =>
+export const selectShopCollection = selectRouteName =>
   createSelector(
     [selectShopCollections],
     shopCollection =>

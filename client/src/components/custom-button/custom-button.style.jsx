@@ -1,7 +1,5 @@
 import style, { css } from "styled-components";
 
-
-
 const GoogleButtonStyle = css`
   background-color: rgba(0, 174, 255, 0.76);
   color: white;

@@ -7,7 +7,7 @@ import { config } from "./config";
 const privateConfig = process.env.REACT_APP_FIREBASE_CONFIG_STRINGIFY;
 let firebaseConfig = config;
 
-if(privateConfig){
+if (privateConfig) {
   firebaseConfig = JSON.parse(privateConfig);
 }
 firebase.initializeApp(firebaseConfig);
@@ -15,8 +15,12 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-// create user
-export const createUserProfileDoccument = async (userAuth, additionalData) => {
+/**
+ * Create new user document to user collection at firestore
+ * @param  {String} userAuth user data from firebase
+ * @param  {Object} additionalData other data to add
+ */
+export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -36,6 +40,27 @@ export const createUserProfileDoccument = async (userAuth, additionalData) => {
     }
   }
   return userRef;
+};
+
+/**
+ * Add Collection to firebase
+ * @param {String} collectionKey The key for colection
+ * @param {Array} objectItems The collection and items to add
+ */
+export const addCollectionAndDocument = async (
+  collectionKey,
+  objectItems = []
+) => {
+  // find collection by Key
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+  objectItems.forEach(item => {
+    // create new document with uniqueid
+    const doc = collectionRef.doc();
+    batch.set(doc, { title: item.title, items: item.items });
+  });
+
+  await batch.commit();
 };
 
 // auth google
