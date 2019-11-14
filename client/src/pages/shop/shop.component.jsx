@@ -1,21 +1,27 @@
 import React from "react";
-import { Route } from 'react-router-dom';
+import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 
-import { firestore, convertCollectionsToSnapshot } from '../../firebase/firebase.utill';
+import {
+  firestore,
+  convertCollectionsToSnapshot
+} from "../../firebase/firebase.utill";
 import CollectionOverview from "../../components/collection-overview/collection-overview.component";
 import Category from "../category/category.component";
+import { updateShopCollections } from "../../redux/shop/shop.action";
 
-class ShopPage extends React.Component{
+class ShopPage extends React.Component {
   unsubscribeFromShop = null;
 
-  componentDidMount(){
-    const collectionsRef = firestore.collection('collections')
+  componentDidMount() {
+    const collectionsRef = firestore.collection("collections");
     this.unsubscribeFromShop = collectionsRef.onSnapshot(async snapshot => {
-      console.log(convertCollectionsToSnapshot(snapshot))
-    })
+      const collectionsHashData = convertCollectionsToSnapshot(snapshot);
+      this.props.updateShopCollections(collectionsHashData);
+    });
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     // stop firebase event
     this.unsubscribeFromShop();
   }
@@ -24,11 +30,21 @@ class ShopPage extends React.Component{
     const match = this.props;
     return (
       <div className="shop-page">
-        <Route exact path={match.path} component={CollectionOverview}/>
-        <Route path={`${match.path}/:categoryId`} component={Category}/>
+        <Route exact path={match.path} component={CollectionOverview} />
+        <Route path={`${match.path}/:categoryId`} component={Category} />
       </div>
     );
   }
 }
 
-export default ShopPage;
+const mapDispatchToPros = dispatch => {
+  return {
+    updateShopCollections: collections =>
+      dispatch(updateShopCollections(collections))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToPros
+)(ShopPage);

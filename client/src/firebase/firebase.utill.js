@@ -79,15 +79,19 @@ export const addCollectionAndDocument = async (
  */
 export const convertCollectionsToSnapshot = collections => {
   const collectionsSnapshot = collections.docs.map(document => {
-    const {title, items} = document.data();
+    const { title, items } = document.data();
 
     return {
       routeName: encodeURI(title.toLowerCase()),
       id: document.id,
       title,
       items
-    }
+    };
   });
 
-  return collectionsSnapshot;
-}
+  // map array to hash table
+  return collectionsSnapshot.reduce((accumulator, currentValue) => {
+    accumulator[currentValue.title.toLowerCase()] = currentValue;
+    return accumulator;
+  }, {});
+};
