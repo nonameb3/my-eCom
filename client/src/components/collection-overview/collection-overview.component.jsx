@@ -12,7 +12,6 @@ export class CollectionOverview extends Component {
   };
 
   render() {
-    console.log(this.state.collection)
     return (
       <div className="collection-overview">
         {this.state.collection.map(({ id, ...Other }) => (

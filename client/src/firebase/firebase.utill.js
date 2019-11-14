@@ -15,6 +15,13 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+// auth google
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export default firebase;
+
+//#region createUserProfileDocument fn
 /**
  * Create new user document to user collection at firestore
  * @param  {String} userAuth user data from firebase
@@ -41,7 +48,9 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
   return userRef;
 };
+//#endregion
 
+//#region addCollectionAndDocument fn
 /**
  * Add Collection to firebase
  * @param {String} collectionKey The key for colection
@@ -62,10 +71,23 @@ export const addCollectionAndDocument = async (
 
   await batch.commit();
 };
+//#endregion
 
-// auth google
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+/**
+ * Convert Collections snapshot from firebase to array
+ * @param {Object} collections Oject collections snapshot from firestore
+ */
+export const convertCollectionsToSnapshot = collections => {
+  const collectionsSnapshot = collections.docs.map(document => {
+    const {title, items} = document.data();
 
-export default firebase;
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: document.id,
+      title,
+      items
+    }
+  });
+
+  return collectionsSnapshot;
+}
