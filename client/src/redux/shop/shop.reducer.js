@@ -2,7 +2,7 @@ import { SHOP_DATA } from "./shop.data";
 import { UPDATE_SHOP_COLLECTIONS} from './shop.type';
 
 const INITIAL_STATE = {
-  collection: SHOP_DATA
+  collection: null
 };
 
 export default function(state = INITIAL_STATE, action) {

@@ -9,12 +9,14 @@ export const selectShopCollections = createSelector(
 
 export const selectShopCollectionsArray = createSelector(
   [selectShopCollections],
-  selectShopCollections => Object.values(selectShopCollections)
-)
+  selectShopCollections =>
+    selectShopCollections ? Object.values(selectShopCollections) : null
+);
 
-export const selectShopCollection = selectRouteName =>
-  createSelector(
+export const selectShopCollection = selectRouteName =>{
+  return createSelector(
     [selectShopCollections],
-    shopCollection =>
-      shopCollection[selectRouteName]
+    shopCollection => shopCollection[selectRouteName]
   );
+}
+
