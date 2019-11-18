@@ -13,10 +13,14 @@ export const selectShopCollectionsArray = createSelector(
     selectShopCollections ? Object.values(selectShopCollections) : null
 );
 
-export const selectShopCollection = selectRouteName =>{
+export const selectShopCollection = selectRouteName => {
   return createSelector(
     [selectShopCollections],
     shopCollection => shopCollection[selectRouteName]
   );
-}
+};
 
+export const selectIsFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
