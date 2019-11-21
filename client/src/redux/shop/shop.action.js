@@ -11,7 +11,7 @@ export const updateShopCollections = collections => {
   };
 };
 
-const fetchCollectionStart = () => ({
+export const fetchCollectionStart = () => ({
   type: TYPE.UPDATE_SHOP_COLLECTIONS_API_START
 });
 

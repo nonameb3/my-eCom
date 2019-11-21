@@ -5,20 +5,16 @@ import { createStructuredSelector } from "reselect";
 
 import CollectionOverviewContainer from "../../components/collection-overview/collection-overview.container";
 import CategoryContainer from "../category/category.container";
-import WithSpinner from "../../components/with-spinner/with-spinner.component";
-import { fetchCollectionAsync } from "../../redux/shop/shop.action";
+import { fetchCollectionStart } from "../../redux/shop/shop.action";
 import { selectIsFetching, selectIsCollecttionLoaded } from "../../redux/shop/shop.selection";
-
-// const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
-// const CategoryWithSpinner = WithSpinner(Category);
 
 class ShopPage extends React.Component {
   componentDidMount() {
-    this.props.fetchCollectionAsync();
+    this.props.fetchCollectionStart();
   }
 
   render() {
-    const { match, isFetching, isLoaded } = this.props;
+    const { match } = this.props;
     return (
       <div className="shop-page">
         <Route
@@ -43,7 +39,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToPros = dispatch => {
   return {
-    fetchCollectionAsync: () => dispatch(fetchCollectionAsync())
+    fetchCollectionStart: () => dispatch(fetchCollectionStart())
   };
 };
 
