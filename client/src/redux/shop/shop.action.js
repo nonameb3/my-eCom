@@ -15,20 +15,21 @@ export const fetchCollectionStart = () => ({
   type: TYPE.UPDATE_SHOP_COLLECTIONS_API_START
 });
 
-const fetchCollectionSuccess = collectionsItems => {
+export const fetchCollectionSuccess = collectionsItems => {
   return {
     type: TYPE.UPDATE_SHOP_COLLECTIONS_API_SUCCESS,
     payload: collectionsItems
   };
 };
 
-const fetchCollectionFailure = errorMessage => {
+export const fetchCollectionFailure = errorMessage => {
   return {
     type: TYPE.UPDATE_SHOP_COLLECTIONS_API_FAILURE,
     payload: errorMessage
   };
 };
 
+// fetch data
 export const fetchCollectionAsync = () => dispatch => {
   dispatch(fetchCollectionStart());
   const collectionsRef = firestore.collection("collections");
