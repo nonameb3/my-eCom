@@ -8,13 +8,18 @@ import Homepage from "./pages/homepage/homepage.component";
 import Shop from "./pages/shop/shop.component";
 import Checkout from "./pages/checkout/checkout.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utill";
-import setCurrentUser from "./redux/user/user.action";
+import { setCurrentUser } from "./redux/user/user.actions";
 import "./App.css";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    // function from firebase
+    // this.onAuthStateChangedFn();
+  }
+
+  onAuthStateChangedFn() {
     const { setCurrentUser } = this.props;
     // function call any time the auth state changes
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
@@ -23,10 +28,8 @@ class App extends React.Component {
         userRef.onSnapshot(snapShot => {
           setCurrentUser(
             {
-              currentUser: {
-                id: snapShot.id,
-                ...snapShot.data()
-              }
+              id: snapShot.id,
+              ...snapShot.data()
             },
             () => console.log(this.state)
           );
@@ -61,7 +64,4 @@ const mapDispatchToProps = dispatch => {
   return { setCurrentUser: user => dispatch(setCurrentUser(user)) };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default connect(null, mapDispatchToProps)(App);
