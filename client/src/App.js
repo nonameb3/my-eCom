@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import Header from "./components/header/header.component";
@@ -6,9 +7,14 @@ import SignIn from "./pages/singIn/signIn.component";
 import Homepage from "./pages/homepage/homepage.component";
 import Shop from "./pages/shop/shop.component";
 import Checkout from "./pages/checkout/checkout.component";
+import { checkUserAuthentication } from "./redux/user/user.actions";
 import "./App.css";
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.checkUserAuthentication();
+  }
+
   render() {
     return (
       <div className="App">
@@ -24,4 +30,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispathToProps = dispatch => ({
+  checkUserAuthentication: () => dispatch(checkUserAuthentication())
+});
+
+export default connect(null, mapDispathToProps)(App);

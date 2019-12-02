@@ -21,3 +21,5 @@ export const signInFailure = error => ({
   type: TYPE.SIGN_IN_FAILURE,
   payload: error
 });
+
+export const checkUserAuthentication = () => ({type: TYPE.CHECK_USER_SESSION});

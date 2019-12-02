@@ -2,6 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { config } from "./config";
+import { resolve } from "dns";
 
 // config firebase key
 const privateConfig = process.env.REACT_APP_FIREBASE_CONFIG_STRINGIFY;
@@ -94,4 +95,13 @@ export const convertCollectionsToSnapshot = collections => {
     accumulator[currentValue.title.toLowerCase()] = currentValue;
     return accumulator;
   }, {});
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
