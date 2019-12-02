@@ -10,13 +10,15 @@ import {
   signInSuccess,
   signInFailure,
   signOutSuccess,
-  signOutFailure
+  signOutFailure,
+  signUpSuccess,
+  SignUpFailure
 } from "./user.actions";
 import * as TYPE from "./user.type";
 
-function* processUserSnapshot(user) {
+function* processUserSnapshot(user, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, user);
+    const userRef = yield call(createUserProfileDocument, user, additionalData);
     const userSnapshot = yield userRef.get();
 
     // put is send data back to redux
@@ -71,6 +73,21 @@ function* signOut() {
   }
 }
 
+function* signUpStart(props) {
+  const { email, password } = props.payload;
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(
+      email.trim(),
+      password
+    );
+
+    yield put(signUpSuccess(user));
+    yield processUserSnapshot(user, props.payload);
+  } catch (error) {
+    yield put(SignUpFailure(error))
+  }
+};
+
 // handle function
 function* onGoogleSignInStartSaga() {
   yield takeLatest(TYPE.GOOGLE_SIGN_IN_START, siginWithGoogle);
@@ -88,11 +105,16 @@ function* onSignOut() {
   yield takeLatest(TYPE.SIGN_OUT_START, signOut);
 }
 
+function* onSignUpStart() {
+  yield takeLatest(TYPE.SIGN_UP_START, signUpStart)
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStartSaga),
     call(onEmailSignInStartSaga),
     call(onCheckUserSaga),
-    call(onSignOut)
+    call(onSignOut),
+    call(onSignUpStart),
   ]);
 }

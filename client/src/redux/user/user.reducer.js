@@ -21,6 +21,7 @@ export default function userReducer(state = INITIAL_STATE, action) {
       }
     case TYPE.SIGN_IN_FAILURE:
     case TYPE.SIGN_OUT_FAILURE:
+    case TYPE.SIGN_UP_FAILURE:
       return {
         ...state,
         error: action.payload

@@ -40,3 +40,18 @@ export const signOutFailure = error => ({
 export const checkUserAuthentication = () => ({
   type: TYPE.CHECK_USER_SESSION
 });
+
+export const signUpStart = formInput => ({
+  type: TYPE.SIGN_UP_START,
+  payload: formInput
+})
+
+export const signUpSuccess = user => ({
+  type: TYPE.SIGN_UP_SUCCESS,
+  payload: user
+})
+
+export const SignUpFailure = error => ({
+  type: TYPE.SIGN_UP_FAILURE,
+  payload: error
+})
