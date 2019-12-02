@@ -6,7 +6,12 @@ import {
   createUserProfileDocument,
   getCurrentUser
 } from "../../firebase/firebase.utill";
-import { signInSuccess, signInFailure } from "./user.actions";
+import {
+  signInSuccess,
+  signInFailure,
+  signOutSuccess,
+  signOutFailure
+} from "./user.actions";
 import * as TYPE from "./user.type";
 
 function* processUserSnapshot(user) {
@@ -57,11 +62,20 @@ function* isUserAuthenticatd() {
   }
 }
 
-export function* googleSignInStartSaga() {
+function* signOut() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch (error) {
+    yield put(signOutFailure(error));
+  }
+}
+
+export function* onGoogleSignInStartSaga() {
   yield takeLatest(TYPE.GOOGLE_SIGN_IN_START, siginWithGoogle);
 }
 
-export function* emailSignInStartSaga() {
+export function* onEmailSignInStartSaga() {
   yield takeLatest(TYPE.EMAIL_SIGN_IN_START, signinWithEmail);
 }
 
@@ -69,10 +83,15 @@ export function* onCheckUserSaga() {
   yield takeLatest(TYPE.CHECK_USER_SESSION, isUserAuthenticatd);
 }
 
+export function* onSignOut() {
+  yield takeLatest(TYPE.SIGN_OUT_START, signOut);
+}
+
 export function* userSagas() {
   yield all([
-    call(googleSignInStartSaga),
-    call(emailSignInStartSaga),
-    call(onCheckUserSaga)
+    call(onGoogleSignInStartSaga),
+    call(onEmailSignInStartSaga),
+    call(onCheckUserSaga),
+    call(onSignOut)
   ]);
 }

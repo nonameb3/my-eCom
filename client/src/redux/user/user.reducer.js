@@ -13,7 +13,14 @@ export default function userReducer(state = INITIAL_STATE, action) {
         currentUser: action.payload,
         error: null
       };
+    case TYPE.SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        currentUser: null,
+        error: null
+      }
     case TYPE.SIGN_IN_FAILURE:
+    case TYPE.SIGN_OUT_FAILURE:
       return {
         ...state,
         error: action.payload
