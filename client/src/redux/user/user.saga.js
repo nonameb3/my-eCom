@@ -71,19 +71,20 @@ function* signOut() {
   }
 }
 
-export function* onGoogleSignInStartSaga() {
+// handle function
+function* onGoogleSignInStartSaga() {
   yield takeLatest(TYPE.GOOGLE_SIGN_IN_START, siginWithGoogle);
 }
 
-export function* onEmailSignInStartSaga() {
+function* onEmailSignInStartSaga() {
   yield takeLatest(TYPE.EMAIL_SIGN_IN_START, signinWithEmail);
 }
 
-export function* onCheckUserSaga() {
+function* onCheckUserSaga() {
   yield takeLatest(TYPE.CHECK_USER_SESSION, isUserAuthenticatd);
 }
 
-export function* onSignOut() {
+function* onSignOut() {
   yield takeLatest(TYPE.SIGN_OUT_START, signOut);
 }
 

@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from "redux-saga/effects";
+import { takeEvery, call, put, all } from "redux-saga/effects";
 
 import {
   firestore,
@@ -8,7 +8,6 @@ import { fetchCollectionFailure, fetchCollectionSuccess } from "./shop.action";
 import * as TYPE from "./shop.type";
 
 function* fetchCollectionAsync() {
-  // yield console.log("fired fn");
   try {
     const collectionsRef = firestore.collection("collections");
     const snapshot = yield collectionsRef.get();
@@ -22,6 +21,11 @@ function* fetchCollectionAsync() {
   }
 }
 
-export function* fetchCollectionStart() {
+// handle function
+function* fetchCollectionStart() {
   yield takeEvery(TYPE.UPDATE_SHOP_COLLECTIONS_API_START, fetchCollectionAsync);
+}
+
+export function* shopSaga() {
+  yield all([call(fetchCollectionStart)]);
 }
