@@ -19,7 +19,8 @@ export class signUpCompoent extends Component {
   handleOnSubmit = async event => {
     event.preventDefault();
     const { signUpStart, history } = this.props;
-    const additionalData, { password, confirmPassword } = this.state;
+    const { password, confirmPassword } = this.state;
+    const additionalData = this.state;
 
     if (password !== confirmPassword) {
       alert("Password and confirm'password not match!");
