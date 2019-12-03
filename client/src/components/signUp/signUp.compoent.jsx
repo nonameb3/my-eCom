@@ -3,7 +3,6 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { selectCurrentUser } from "../../redux/user/user.selectors";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { signUpStart } from "../../redux/user/user.actions";
@@ -17,25 +16,17 @@ export class signUpCompoent extends Component {
     confirmPassword: ""
   };
 
-  componentDidUpdate(preProps) {
-    if(preProps.userStore != this.props.userStore){
-      if (this.props.userStore != null) {
-        this.props.history.push("/");
-      }
-    }
-  }
-
   handleOnSubmit = async event => {
     event.preventDefault();
-    const { signUpStart } = this.props;
-    const { password, confirmPassword } = this.state;
+    const { signUpStart, history } = this.props;
+    const additionalData, { password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
       alert("Password and confirm'password not match!");
       return;
     }
 
-    signUpStart({ ...this.state });
+    signUpStart({ additionalData, history });
   };
 
   handleOnChange = event => {
@@ -86,10 +77,6 @@ export class signUpCompoent extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { userStore: selectCurrentUser(state) };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     signUpStart: fromInput => dispatch(signUpStart(fromInput))
@@ -98,5 +85,5 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(null, mapDispatchToProps)
 )(signUpCompoent);

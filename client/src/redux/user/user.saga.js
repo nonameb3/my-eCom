@@ -74,7 +74,7 @@ function* signOut() {
 }
 
 function* signUpStart(props) {
-  const { email, password } = props.payload;
+  const { email, password } = props.payload.additionalData;
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(
       email.trim(),
@@ -82,7 +82,8 @@ function* signUpStart(props) {
     );
 
     yield put(signUpSuccess(user));
-    yield processUserSnapshot(user, props.payload);
+    yield processUserSnapshot(user, props.payload.additionalData);
+    props.payload.history.push("/");
   } catch (error) {
     yield put(SignUpFailure(error))
   }
