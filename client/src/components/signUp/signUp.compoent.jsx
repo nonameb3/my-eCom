@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import {  auth, createUserProfileDocument } from "../../firebase/firebase.utill";
+import { signUpStart } from "../../redux/user/user.actions";
 import "./signUp.style.scss";
 
 export class signUpCompoent extends Component {
@@ -15,28 +18,15 @@ export class signUpCompoent extends Component {
 
   handleOnSubmit = async event => {
     event.preventDefault();
-    const { email, displayName, password, confirmPassword } = this.state;
+    const { signUpStart, history } = this.props;
+    const additionalData, { password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
       alert("Password and confirm'password not match!");
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email.trim(),
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
+    signUpStart({ additionalData, history });
   };
 
   handleOnChange = event => {
@@ -50,7 +40,7 @@ export class signUpCompoent extends Component {
         <h1>I do not have a account.</h1>
         <span>Sign up with your email and password</span>
         <form onSubmit={this.handleOnSubmit}>
-        <FormInput
+          <FormInput
             type="text"
             name="displayName"
             label="Display Name"
@@ -87,4 +77,13 @@ export class signUpCompoent extends Component {
   }
 }
 
-export default signUpCompoent;
+const mapDispatchToProps = dispatch => {
+  return {
+    signUpStart: fromInput => dispatch(signUpStart(fromInput))
+  };
+};
+
+export default compose(
+  withRouter,
+  connect(null, mapDispatchToProps)
+)(signUpCompoent);
