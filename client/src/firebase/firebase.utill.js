@@ -2,7 +2,6 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { config } from "./config";
-import { resolve } from "dns";
 
 // config firebase key
 const privateConfig = process.env.REACT_APP_FIREBASE_CONFIG_STRINGIFY;
