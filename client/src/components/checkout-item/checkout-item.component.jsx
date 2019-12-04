@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import {
   deleteCartItem,
@@ -8,8 +8,15 @@ import {
 } from "../../redux/cart/cart.action";
 import "./checkout-item.style.scss";
 
-const CheckoutItem = ({ cartItem, deleteItem, addItem, removeItem }) => {
+const CheckoutItem = ({ cartItem }) => {
+  const dispatch = useDispatch();
   const { imageUrl, name, price, quantity } = cartItem;
+  const { deleteItem, addItem, removeItem } = {
+    deleteItem: item => dispatch(deleteCartItem(item)),
+    addItem: item => dispatch(addCartItem(item)),
+    removeItem: item => dispatch(removeCartItem(item))
+  };
+
   return (
     <div className="checkout-item">
       <div className="image-container">
@@ -33,13 +40,4 @@ const CheckoutItem = ({ cartItem, deleteItem, addItem, removeItem }) => {
   );
 };
 
-const mapDispathToProps = dispatch => ({
-  deleteItem: item => dispatch(deleteCartItem(item)),
-  addItem: item => dispatch(addCartItem(item)),
-  removeItem: item => dispatch(removeCartItem(item))
-});
-
-export default connect(
-  null,
-  mapDispathToProps
-)(CheckoutItem);
+export default CheckoutItem;

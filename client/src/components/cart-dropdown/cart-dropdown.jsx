@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 
@@ -9,7 +9,10 @@ import { toggleCart } from "../../redux/cart/cart.action";
 import { selecterCartItems } from "../../redux/cart/cart.selectors";
 import "./cart-dropdown.style.scss";
 
-const cartDropdown = ({ cartItems, history, dispatch }) => {
+const CartDropdown = ({ history }) => {
+  const cartItems = useSelector(state => selecterCartItems(state));
+  const dispatch = useDispatch();
+
   const onClick = () => {
     history.push("/checkout");
     dispatch(toggleCart());
@@ -31,11 +34,4 @@ const cartDropdown = ({ cartItems, history, dispatch }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { cartItems: selecterCartItems(state) };
-};
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps)
-)(cartDropdown);
+export default compose(withRouter)(CartDropdown);

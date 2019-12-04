@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import FormInput from "../form-input/form-input.component";
@@ -9,6 +9,7 @@ import { signUpStart } from "../../redux/user/user.actions";
 import "./signUp.style.scss";
 
 function SignUpCompoent(props) {
+  const dispatch = useDispatch();
   const [userCredentials, setUserCredentials] = useState({
     displayName: "",
     email: "",
@@ -16,11 +17,11 @@ function SignUpCompoent(props) {
     confirmPassword: ""
   });
 
-  const { displayName, email ,password, confirmPassword } = userCredentials;
+  const { displayName, email, password, confirmPassword } = userCredentials;
 
   const handleOnSubmit = async event => {
     event.preventDefault();
-    const { signUpStart, history } = props;
+    const { history } = props;
     const additionalData = userCredentials;
 
     if (password !== confirmPassword) {
@@ -28,7 +29,7 @@ function SignUpCompoent(props) {
       return;
     }
 
-    signUpStart({ additionalData, history });
+    dispatch(signUpStart({ additionalData, history }));
   };
 
   const handleOnChange = event => {
@@ -77,13 +78,4 @@ function SignUpCompoent(props) {
   );
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signUpStart: fromInput => dispatch(signUpStart(fromInput))
-  };
-};
-
-export default compose(
-  withRouter,
-  connect(null, mapDispatchToProps)
-)(SignUpCompoent);
+export default compose(withRouter)(SignUpCompoent);

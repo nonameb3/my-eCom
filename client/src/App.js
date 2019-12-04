@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import Header from "./components/header/header.component";
@@ -10,10 +10,12 @@ import Checkout from "./pages/checkout/checkout.component";
 import { checkUserAuthentication } from "./redux/user/user.actions";
 import "./App.css";
 
-function App({checkUserAuthentication}) {
+function App() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    checkUserAuthentication();
-  }, [checkUserAuthentication]);
+    dispatch(checkUserAuthentication());
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -28,8 +30,4 @@ function App({checkUserAuthentication}) {
   );
 }
 
-const mapDispathToProps = dispatch => ({
-  checkUserAuthentication: () => dispatch(checkUserAuthentication())
-});
-
-export default connect(null, mapDispathToProps)(App);
+export default App;
