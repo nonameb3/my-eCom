@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Header from "./components/header/header.component";
+import Header from "./components/header/header.container";
 import SignIn from "./pages/singIn/signIn.component";
 import Homepage from "./pages/homepage/homepage.component";
 import Shop from "./pages/shop/shop.component";
