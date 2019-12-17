@@ -35,4 +35,7 @@ export const removeCartItem = (cartitems = [], removeCartItem = {}) => {
   }
 
   return cartitems;
-}
+};
+
+export const GetCartItemsCount = cartItems =>
+  cartItems.reduce((preItem, item) => preItem + item.quantity, 0)
