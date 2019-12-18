@@ -35,9 +35,15 @@
   .custom-button {
     position: absolute;
     top: 255px;
-    opacity: 0.9;
-    width: 80%;
+    opacity: 0;
+    width: 100%;
     display: none;
+
+    @media screen and (max-width: 800px) {
+      display: block;
+      min-width: unset;
+      padding: 0px 10px;
+    }
   }
 
   &:hover {
@@ -48,6 +54,23 @@
 
     .custom-button {
       display: inline;
+      opacity: 0.9;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw ;
+
+    &:hover {
+      .image {
+        transform: unset;
+        opacity: unset;
+      }
+  
+      .custom-button {
+        opacity: 0.85;
+        display: flex;
+      }
     }
   }
 }

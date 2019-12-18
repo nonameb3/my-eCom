@@ -2,4 +2,11 @@
   display: flex;
   justify-content: space-between;
   margin: 2rem 15rem;
+
+  @media screen and(max-width: 800px) {
+    padding: 0px;
+    margin: 0px;
+    display: grid;
+    text-align: center;
+  }
 }

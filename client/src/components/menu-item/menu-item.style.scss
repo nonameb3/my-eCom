@@ -1,3 +1,5 @@
+$break-large: 800px;
+
 .menu-item {
   min-width: 30%;
   height: 240px;
@@ -63,5 +65,9 @@
       font-weight: lighter;
       font-size: 16px;
     }
+  }
+
+  @media screen and (max-width: $break-large) {
+    height: 240px !important;
   }
 }

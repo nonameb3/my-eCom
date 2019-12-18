@@ -23,7 +23,7 @@ function Header() {
   return (
     <Style.HeaderContainer>
       <Style.LogoContainer to="/">
-        <Logo />
+        <Logo style={{height:'100%', width:'100%'}}/>
       </Style.LogoContainer>
       <Style.OptionsContainer>
         <Style.OptionLink to="/shop">Shop</Style.OptionLink>

@@ -4,5 +4,12 @@ export const HomePage = style.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 80px;
+
+  @media screen and (min-width: 600px) {
+    padding: 20px 80px;
+  }
+`;
+
+export const H1 = style.h1`
+  text-align: center;
 `;
