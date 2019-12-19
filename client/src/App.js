@@ -6,6 +6,7 @@ import { checkUserAuthentication } from "./redux/user/user.actions";
 
 import Header from "./components/header/header.component";
 import Spiner from "./components/spiner/spiner.component";
+import ErrorBoundary from "./components/error-boundary/error-boundary.component";
 import "./App.css";
 
 const SignIn = React.lazy(() => import("./pages/singIn/signIn.component"));
@@ -29,7 +30,15 @@ function App() {
       <Header />
       <Switch>
         <React.Suspense fallback={<Spiner />}>
-          <Route path="/" exact component={Homepage} />
+          <Route
+            path="/"
+            exact
+            render={props => (
+              <ErrorBoundary {...props}>
+                <Homepage />
+              </ErrorBoundary>
+            )}
+          />
           <Route path="/checkout" component={Checkout} />
           <Route path="/shop" component={Shop} />
           <Route path="/signin" exact component={SignIn} />
