@@ -2,13 +2,20 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import Header from "./components/header/header.component";
-import SignIn from "./pages/singIn/signIn.component";
-import Homepage from "./pages/homepage/homepage.component";
-import Shop from "./pages/shop/shop.component";
-import Checkout from "./pages/checkout/checkout.component";
 import { checkUserAuthentication } from "./redux/user/user.actions";
+
+import Header from "./components/header/header.component";
+import Spiner from "./components/spiner/spiner.component";
 import "./App.css";
+
+const SignIn = React.lazy(() => import("./pages/singIn/signIn.component"));
+const Homepage = React.lazy(() =>
+  import("./pages/homepage/homepage.component")
+);
+const Shop = React.lazy(() => import("./pages/shop/shop.component"));
+const Checkout = React.lazy(() =>
+  import("./pages/checkout/checkout.component")
+);
 
 function App() {
   const dispatch = useDispatch();
@@ -21,10 +28,12 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Route path="/" exact component={Homepage} />
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/shop" component={Shop} />
-        <Route path="/signin" exact component={SignIn} />
+        <React.Suspense fallback={<Spiner />}>
+          <Route path="/" exact component={Homepage} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/shop" component={Shop} />
+          <Route path="/signin" exact component={SignIn} />
+        </React.Suspense>
       </Switch>
     </div>
   );
