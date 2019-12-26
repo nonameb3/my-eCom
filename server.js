@@ -22,7 +22,7 @@ app.use("/api", paymentRouter);
 
 // ==== set production ====
 if (process.env.NODE_ENV === "production") {
-  app.use(enforce.HTTPS({ trustProtoHeader: false })); // set https
+  app.use(enforce.HTTPS({ trustProtoHeader: true })); // set https
   app.use(express.static(path.join(__dirname, 'client/build')));
 
   app.get('/service-worker.js', (req, res) => {
