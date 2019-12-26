@@ -14,7 +14,6 @@ const paymentRouter = require("./route/payment");
 // ==== Config service ====
 app.use(compression()); // set gzip
 app.use(cors()); // set cors
-app.use(enforce.HTTPS({ trustProtoHeader: true })); // set https
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -23,7 +22,8 @@ app.use("/api", paymentRouter);
 
 // ==== set production ====
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(enforce.HTTPS({ trustProtoHeader: false })); // set https
+  app.use(express.static(path.join(__dirname, 'client/build')));
 
   app.get('/service-worker.js', (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "build", "service-worker.js"))
