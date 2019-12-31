@@ -54,7 +54,7 @@ function* signinWithEmail({ payload: { email, password } }) {
   }
 }
 
-function* isUserAuthenticatd() {
+function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
     if (!userAuth) return;
@@ -99,7 +99,7 @@ function* onEmailSignInStartSaga() {
 }
 
 function* onCheckUserSaga() {
-  yield takeLatest(TYPE.CHECK_USER_SESSION, isUserAuthenticatd);
+  yield takeLatest(TYPE.CHECK_USER_SESSION, isUserAuthenticated);
 }
 
 function* onSignOut() {
