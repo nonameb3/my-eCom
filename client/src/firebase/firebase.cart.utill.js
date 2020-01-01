@@ -38,3 +38,10 @@ export const addCartItemsToDocument = async (userAuth, newItem) => {
 
   return cartRef;
 };
+
+export const fetchCartItemsFromFirestore = async (userAuth) => {
+  const cartRef = firestore.doc(`usersCart/${userAuth.uid}`);
+  const cartSnapShot = await cartRef.get();
+  const cartData = await cartSnapShot.data();
+  return cartData.items;
+}

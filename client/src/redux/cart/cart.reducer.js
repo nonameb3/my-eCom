@@ -13,6 +13,11 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         hidden: !state.hidden
       };
+    case TYPE.FETCH_CART_ITEMS_SUCCESS:
+      return {
+        ...state,
+        cartItems: action.payload
+      }
     case TYPE.ADD_CART_ITEMS_SUCCESS:
       return {
         ...state,

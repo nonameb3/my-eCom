@@ -53,3 +53,16 @@ export const clearAllCartItems = () => {
     type: TYPE.CLEAR_CART_SUCCESS
   }
 };
+
+export const fetchCartItemStart = () => {
+  return {
+    type: TYPE.FETCH_CART_ITEMS_START
+  }
+}
+
+export const fetchCartItemSuccess = (cartItems) => {
+  return {
+    type: TYPE.FETCH_CART_ITEMS_SUCCESS,
+    payload: cartItems
+  }
+}
