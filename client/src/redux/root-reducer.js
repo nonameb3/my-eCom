@@ -11,7 +11,8 @@ import shopReducer from "./shop/shop.reducer";
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["cart"]
+  whitelist: [""]
+  // whitelist: ["cart"] // not use cuse save on firestore
 };
 
 // reducer

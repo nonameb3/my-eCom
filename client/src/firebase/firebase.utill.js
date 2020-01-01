@@ -30,6 +30,7 @@ export default firebase;
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
+  // create user document
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
@@ -46,6 +47,27 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log("createUserProfileDoccument is error", error.message);
     }
   }
+
+  // create usersCart document
+  const cartRef = firestore.doc(`usersCart/${userAuth.uid}`);
+  const cartSnapShot = await cartRef.get();
+
+  if (!cartSnapShot.exists) {
+    try {
+      let data = {
+        id: userAuth.uid,
+        createDate: new Date(),
+        lastUpdate: new Date(),
+        items: []
+      };
+
+      // Add a new document in collection "usersCart" with ID from user
+      await cartRef.set(data);
+    } catch (error) {
+      console.log("addCartItems on firestore is error", error.message);
+    }
+  }
+
   return userRef;
 };
 //#endregion
@@ -57,7 +79,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
  * @param {Array} objectItems The collection and items to add
  */
 export const addCollectionAndDocument = async (
-  collectionKey,
+  collectionKey, // collections
   objectItems = []
 ) => {
   // find collection by Key

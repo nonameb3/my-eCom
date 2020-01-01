@@ -13,22 +13,22 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         hidden: !state.hidden
       };
-    case TYPE.ADD_CART_ITEMS:
+    case TYPE.ADD_CART_ITEMS_SUCCESS:
       return {
         ...state,
         cartItems: addNewCartItems(state.cartItems, action.payload)
       }
-    case TYPE.REMOVE_CART_ITEM:
+    case TYPE.REMOVE_CART_ITEM_SUCCESS:
       return {
         ...state,
-        cartItems: removeCartItem(state.cartItems, action.payload)
+        // cartItems: removeCartItem(state.cartItems, action.payload)
       }
-    case TYPE.DELETE_CART_ITEM:
+    case TYPE.DELETE_CART_ITEM_SUCESS:
       return {
         ...state,
-        cartItems: state.cartItems.filter(item => item.id !== action.payload.id)
+        // cartItems: state.cartItems.filter(item => item.id !== action.payload.id)
       }
-    case TYPE.CLEAR_CART:
+    case TYPE.CLEAR_CART_SUCCESS:
       return {
         ...state,
         cartItems: []
