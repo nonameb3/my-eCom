@@ -31,7 +31,7 @@ export default function(state = INITIAL_STATE, action) {
     case TYPE.DELETE_CART_ITEM_SUCESS:
       return {
         ...state,
-        // cartItems: state.cartItems.filter(item => item.id !== action.payload.id)
+        cartItems: state.cartItems.filter(item => item.id !== action.payload.id)
       }
     case TYPE.CLEAR_CART_SUCCESS:
       return {

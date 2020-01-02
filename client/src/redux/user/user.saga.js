@@ -14,7 +14,6 @@ import {
   signUpSuccess,
   SignUpFailure
 } from "./user.actions";
-import { fetchCartItemStart } from '../cart/cart.action';
 import * as TYPE from "./user.type";
 
 function* processUserSnapshot(user, additionalData) {
@@ -59,9 +58,8 @@ function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
     if (!userAuth) return;
-    console.log('start')
+    
     yield processUserSnapshot(userAuth);
-    yield put(fetchCartItemStart()); // fetch cartItems
   } catch (error) {
     yield put(signInFailure(error));
   }

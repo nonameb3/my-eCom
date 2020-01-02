@@ -1,10 +1,11 @@
-import { all, put, call, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, put, call, takeLatest } from "redux-saga/effects";
 
 import { getCurrentUser } from "../../firebase/firebase.utill";
 import {
   addCartItemsToDocument,
   fetchCartItemsFromFirestore,
-  removeCartItemsFromFireStore
+  removeCartItemsFromFireStore,
+  deleteCartItemsFromFireStore
 } from "../../firebase/firebase.cart.utill";
 import * as cartAction from "./cart.action";
 import * as CARTTYPE from "./cart.type";
@@ -30,8 +31,12 @@ function* removeCartItems({ payload }) {
   yield put(cartAction.removeCartItemSuccess(payload));
 }
 
-function* deleteCartItems() {
-  yield console.log("deleteCartItems");
+function* deleteCartItems({ payload }) {
+  const userAuth = yield getCurrentUser();
+  if (!userAuth) return;
+
+  yield deleteCartItemsFromFireStore(userAuth, payload);
+  yield put(cartAction.deleteCartItemSuccess(payload));
 }
 
 function* fetchCartItems() {

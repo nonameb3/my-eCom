@@ -59,6 +59,17 @@ export const removeCartItemsFromFireStore = async (userAuth, newItem) => {
   });
 }
 
+export const deleteCartItemsFromFireStore = async (userAuth, newItem) => {
+  const cartRef = firestore.doc(`usersCart/${userAuth.uid}`);
+  const cartSnapShot = await cartRef.get();
+  const cartData = cartSnapShot.data();
+
+  const filterCartItems = cartData.items.filter(cart => cart.id !== newItem.id);
+  await cartRef.update({
+    items: [...filterCartItems]
+  });
+}
+
 export const fetchCartItemsFromFirestore = async (userAuth) => {
   const cartRef = firestore.doc(`usersCart/${userAuth.uid}`);
   const cartSnapShot = await cartRef.get();

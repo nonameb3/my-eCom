@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, batch} from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import { checkUserAuthentication } from "./redux/user/user.actions";
+import { fetchCartItemStart } from './redux/cart/cart.action';
 
 import Header from "./components/header/header.component";
 import Spiner from "./components/spiner/spiner.component";
@@ -22,7 +23,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkUserAuthentication());
+    batch(() => {
+      dispatch(checkUserAuthentication());
+      dispatch(fetchCartItemStart());
+    })
   }, [dispatch]);
 
   return (
