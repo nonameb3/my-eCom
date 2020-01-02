@@ -8,7 +8,7 @@ import rootReducer from "./root-reducer";
 
 const sagaMiddelware = createReduxSagamiddelware();
 let middlewares = [sagaMiddelware];
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
   middlewares = [...middlewares, logger];
 }
 
