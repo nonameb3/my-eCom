@@ -59,6 +59,7 @@ function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
     if (!userAuth) return;
+    console.log('start')
     yield processUserSnapshot(userAuth);
     yield put(fetchCartItemStart()); // fetch cartItems
   } catch (error) {

@@ -10,7 +10,7 @@ export const addCartItemsToDocument = async (userAuth, newItem) => {
 
   const cartRef = firestore.doc(`usersCart/${userAuth.uid}`);
   const cartSnapShot = await cartRef.get();
-  const cartData = await cartSnapShot.data();
+  const cartData = cartSnapShot.data();
 
   const existsItemIndex = cartData.items.findIndex(
     item => item.id === newItem.id
@@ -38,6 +38,26 @@ export const addCartItemsToDocument = async (userAuth, newItem) => {
 
   return cartRef;
 };
+
+export const removeCartItemsFromFireStore = async (userAuth, newItem) => {
+  const cartRef = firestore.doc(`usersCart/${userAuth.uid}`);
+  const cartSnapShot = await cartRef.get();
+  const cartData = cartSnapShot.data();
+
+  const existsItemIndex = cartData.items.findIndex(
+    item => item.id === newItem.id
+  );
+
+  const existData = cartData.items[existsItemIndex];
+  const cloneArray = [...cartData.items];
+  cloneArray[existsItemIndex] = {
+    ...existData,
+    quantity: existData.quantity > 0 ? existData.quantity - 1 : existData.quantity
+  };
+  await cartRef.update({
+    items: [...cloneArray]
+  });
+}
 
 export const fetchCartItemsFromFirestore = async (userAuth) => {
   const cartRef = firestore.doc(`usersCart/${userAuth.uid}`);

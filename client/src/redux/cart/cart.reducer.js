@@ -26,7 +26,7 @@ export default function(state = INITIAL_STATE, action) {
     case TYPE.REMOVE_CART_ITEM_SUCCESS:
       return {
         ...state,
-        // cartItems: removeCartItem(state.cartItems, action.payload)
+        cartItems: removeCartItem(state.cartItems, action.payload)
       }
     case TYPE.DELETE_CART_ITEM_SUCESS:
       return {
