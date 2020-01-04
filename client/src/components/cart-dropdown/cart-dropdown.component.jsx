@@ -9,7 +9,7 @@ import { toggleCart } from "../../redux/cart/cart.action";
 import { selecterCartItems } from "../../redux/cart/cart.selectors";
 import "./cart-dropdown.style.scss";
 
-const CartDropdown = ({ history }) => {
+export const CartDropdown = ({ history }) => {
   const cartItems = useSelector(state => selecterCartItems(state));
   const dispatch = useDispatch();
 

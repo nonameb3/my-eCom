@@ -14,7 +14,7 @@ function ShopPage({ match }) {
   }, [dispatch]);
 
   return (
-    <div className="shop-page">
+    <div  id ="123" className="shop-page">
       <Route
         exact
         path={`${match.path}`}
