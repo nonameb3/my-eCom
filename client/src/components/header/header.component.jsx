@@ -28,7 +28,7 @@ function Header() {
       <Style.OptionsContainer>
         <Style.OptionLink to="/shop">Shop</Style.OptionLink>
         {currentUser !== null ? (
-          <Style.OptionDiv onClick={onSignOut}>SignOut</Style.OptionDiv>
+          <Style.OptionDiv id="signout-btn" onClick={onSignOut}>SignOut</Style.OptionDiv>
         ) : (
           <Style.OptionLink to="/signin">SignIn</Style.OptionLink>
         )}

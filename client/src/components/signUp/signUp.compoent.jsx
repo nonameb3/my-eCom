@@ -8,7 +8,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import { signUpStart } from "../../redux/user/user.actions";
 import "./signUp.style.scss";
 
-function SignUpCompoent(props) {
+export function SignUpCompoent(props) {
   const dispatch = useDispatch();
   const [userCredentials, setUserCredentials] = useState({
     displayName: "",
