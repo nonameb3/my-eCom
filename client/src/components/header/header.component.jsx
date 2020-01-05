@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import CartIcon from "../cart-icon/cart-icon.component";
-import CartDropdown from "../cart-dropdown/cart-dropdown";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { signOutStart } from "../../redux/user/user.actions";
@@ -28,7 +28,7 @@ function Header() {
       <Style.OptionsContainer>
         <Style.OptionLink to="/shop">Shop</Style.OptionLink>
         {currentUser !== null ? (
-          <Style.OptionDiv onClick={onSignOut}>SignOut</Style.OptionDiv>
+          <Style.OptionDiv id="signout-btn" onClick={onSignOut}>SignOut</Style.OptionDiv>
         ) : (
           <Style.OptionLink to="/signin">SignIn</Style.OptionLink>
         )}

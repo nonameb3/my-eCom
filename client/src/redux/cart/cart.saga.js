@@ -3,12 +3,12 @@ import { all ,put ,call ,takeLatest } from 'redux-saga/effects';
 import { clearAllCartItems } from './cart.action';
 import * as USERTYPE from '../user/user.type';
 
-function* clearCartStore() {
+export function* clearCartStore() {
   yield put(clearAllCartItems());
 }
 
 // handle function
-function* onSingOutSuccess() {
+export function* onSingOutSuccess() {
   yield takeLatest(USERTYPE.SIGN_OUT_SUCCESS, clearCartStore)
 }
 
